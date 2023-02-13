@@ -7,6 +7,8 @@ const ExpenseForm = (props) => {
     const [eneteredAmount, setEnteredAmount] = useState('')
     const [eneteredDate, setEnteredDate] = useState('')
 
+    const [showForm, setShowForm] = useState(false)
+
     // const [userInput, setUserInput] = useState({
     //     enteredTitle: '',
     //     enteredAmount: '',
@@ -38,11 +40,19 @@ const ExpenseForm = (props) => {
         }
 
         props.onSaveExpenseData(expenseData);
-
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
     }
+
+    const showButtonHandler = () => {
+        setShowForm(true);
+    }
+
+    const unshowButtonHandler = () => {
+        setShowForm(false)
+    }
+
 
 
     return (<form onSubmit={submitHander}>
@@ -61,10 +71,13 @@ const ExpenseForm = (props) => {
                 <input type="date" min='2019-01-01' max='2022-12-31' value={eneteredDate} onChange={dateChangeHandler} />
             </div>
             <div className='new-expense__actions'>
-                <button type='submit' >Add Expense</button>
+                <button type='button' onClick={props.stopEditing}>Cancel</button>
+                <button type='submit' onClick={props.stopEditing} >Add Expense</button>
             </div>
         </div>
     </form>)
 }
+
+
 
 export default ExpenseForm;
